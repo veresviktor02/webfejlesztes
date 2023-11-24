@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+
+        <h:form id="developerForm">
+            <p:menuButton value="navigation">
+                <p:menuitem value="Developer" url="http://localhost:9090/webdev/developer.jsf" />
+                <p:menuitem value="VideoGame" url="http://localhost:9090/webdev/videogame.jsf" />
+            </p:menuButton>
+        </h:form>
+
+        <h:form id="videoGameForm">
+
+            <p:panel header="VideoGame Info" id="videoGamePanel">
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel for="title" value="Title: "/>
+                    <p:inputText id="title" size="40"
+                        value="#{videoGameController.videoGameUITO.title}"
+                        required="true"
+                        requiredMessage="Please enter VideoGame title"
+                    />
+
+                    <p:outputLabel for="genre" value="Genre: "/>
+                    <p:inputText id="genre" size="40"
+                        required="true"
+                        requiredMessage="Please enter VideoGame genre"
+                        value="#{videoGameController.videoGameUITO.genre}"
+                    />
+
+                    <p:outputLabel for="type" value="Type: "/>
+                    <p:inputText id="type"
+                        value="#{videoGameController.videoGameUITO.type}" size="40"
+                        required="true">
+                    </p:inputText>
+
+                    <p:outputLabel for="developer" value="Developer: "/>
+                    <p:selectOneMenu id="developer"
+                        value="#{videoGameController.videoGameUITO.developerUITO}"
+                        style="width:300px" converter="#{developerConverter}">
+                        <f:selectItems value="#{videoGameController.developerUITOList}"
+                            var="developerUITO" itemLabel="#{developerUITO.name}"
+                            itemValue="#{developerUITO}"
+                        />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="#{videoGameController.actionLabel}"
+                        action="#{videoGameController.doSaveInfoVideoGame}"
+                        update="videoGameList videoGamePanel">
+                    </p:commandButton>
+
+                    <ui:remove>
+                        <h:commandButton
+                            value="#{videoGameController.actionLabel}"
+                            action="#{videoGameController.doSaveInfoVideoGame}">
+                            <f:ajax
+                                execute="videoGameForm"
+                                render="videoGameList videoGamePanel"
+                            />
+                        </h:commandButton>
+                    </ui:remove>
+
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel header="VideoGame List" id="videoGameList">
+                <p:dataTable
+                    id="table"
+                    value="#{videoGameController.videoGameUITOList}"
+                    var="videoGame"
+                >
+
+                    <p:column>
+                        <f:facet name="header">VideoGame ID</f:facet>
+                        <h:outputText value="#{videoGame.id}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Title</f:facet>
+                        <h:outputText value="#{videoGame.title}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Genre</f:facet>
+                        <h:outputText value="#{videoGame.genre}">
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Type</f:facet>
+                        <h:outputText value="#{videoGame.type}">
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Developer</f:facet>
+                        <h:outputText value="#{videoGame.developerUITO.name}"/>
+                    </p:column>
+
+                    <p:column id="action">
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="Edit"
+                            action="#{videoGameController.editVideoGame(videoGame)}">
+                            <f:ajax execute="action" render="videoGameForm"/>
+                        </h:commandLink>
+                         /
+                         <h:commandLink value="Delete"
+                             action="#{videoGameController.deleteVideoGame(videoGame)}">
+                             <f:ajax execute="action" render="table"/>
+                         </h:commandLink>
+
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

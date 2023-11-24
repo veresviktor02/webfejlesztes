@@ -1,0 +1,13 @@
+hu/unideb/inf/crud/uito/DeveloperUITO.class
+hu/unideb/inf/crud/repositry/VideoGameRepository.class
+hu/unideb/inf/crud/uito/VideoGameUITO.class
+hu/unideb/inf/crud/service/impl/VideoGameServiceImpl.class
+hu/unideb/inf/crud/utills/DeveloperConverter.class
+hu/unideb/inf/crud/mbean/DeveloperController.class
+hu/unideb/inf/crud/repositry/DeveloperRepository.class
+hu/unideb/inf/crud/entity/VideoGameDTO.class
+hu/unideb/inf/crud/service/impl/DeveloperServiceImpl.class
+hu/unideb/inf/crud/mbean/VideoGameController.class
+hu/unideb/inf/crud/service/DeveloperService.class
+hu/unideb/inf/crud/entity/DeveloperDTO.class
+hu/unideb/inf/crud/service/VideoGameService.class

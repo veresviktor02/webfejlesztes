@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+
+        <h:form id="developerForm">
+            <p:menuButton value="navigation">
+                <p:menuitem value="Developer" url="http://localhost:9090/webdev/developer.jsf" />
+                <p:menuitem value="VideoGame" url="http://localhost:9090/webdev/videogame.jsf" />
+            </p:menuButton>
+        </h:form>
+
+        <h:form>
+            <p:panel>
+
+                <p:dataTable value="#{developerContoller.developerUITOList}" var="developer">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{developer.id}"/>
+                    </p:column>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{developer.name}"/>
+                    </p:column>
+                    <p:column headerText="Number of employees">
+                        <h:outputText value="#{developer.employees}"/>
+                    </p:column>
+                    <p:column headerText="Address">
+                        <h:outputText value="#{developer.address}"/>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
